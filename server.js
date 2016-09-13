@@ -13,7 +13,7 @@ var express = require('express'),
     middleware = require('./middleware'),
     config = require('./config'),
     utils = require('./lib/utils'),
-    port = (process.env.PORT || 8000);
+    port = (config.port || 8000);
 
 
 //Comment out the line below if you want to enable cluster support.
