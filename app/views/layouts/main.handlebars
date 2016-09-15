@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>{{title}} OttoBooks</title>
+
+    <link rel="stylesheet" href="/css/app.css" />
+
+    {{#if ENV_DEVELOPMENT}}
+    <!--<script src="http://localhost:35729/livereload.js"></script>-->
+    {{/if}}
+</head>
+
+<body lang="en">
+
+    <div class="navbar animated fadeInDown">
+        <div class="brand-logo"><span class="otto">Otto</span> <span class="books">Books</span></div>
+                <form action="#" class="search">
+                    <div class="search-dropdown">
+                        <select name="search_type">
+                            <option value="author">Author</option>
+                            <option value="title">Title</option>
+                        </select>
+                    </div>
+                    <div class="search-text">
+                        <label for="q">Find a book&#8230;</label>
+                        <input type="text" id="q" name="q" placeholder="Find a book&#8230;" />
+                    </div>
+                    <button type="submit">Search</button>
+                </form>
+        </div>
+    </div>
+
+    <div class="container">
+        {{{body}}}
+    </div>
+
+    <script src="/main.js"></script>
+</body>
+
+</html>
+

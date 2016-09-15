@@ -41,7 +41,7 @@ h1 {
 }
 
 .brand-logo{
-    background: url(../img/otto-books-white-logo.svg) no-repeat 0 -29px;
+    background: url(../images/otto-books-white-logo.svg) no-repeat 0 -29px;
     background-size: 100%;
     width: 100px;
     height: 55px;
@@ -84,7 +84,7 @@ h1 {
     font-size: 1.1em;
     padding: 0;
     padding-left: 10px;
-    color: #ccc;
+    color: #ccc;    
     margin-left: 20px;
 }
 
@@ -122,7 +122,7 @@ h1 {
     background-color: rgba(255,255,255,0.1);
     border: 1px rgba(255,255,255,0.7) solid;
     outline:none;
-
+    
 }
 
 .search button {
@@ -239,7 +239,7 @@ h1 {
     background-color: rgba(255,255,255,0.2);
     border: 1px rgba(255,255,255,0.7) solid;
     padding: 1em;
-    font-size: 0em;
+    font-size: 0em;    
     height: 50px;
     width: 50px;
     color: transparent;
@@ -266,33 +266,33 @@ h1 {
 }
 
 #previous{
-    background: url(../img/player/previous.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/previous.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 #rewind{
-    background: url(../img/player/rewind.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/rewind.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 #playpause{
-    background: url(../img/player/pause.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/pause.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 
 #playpause.play{
-    background: url(../img/player/play.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/play.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 
 #stop{
-    background: url(../img/player/stop.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/stop.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 #fastforward{
-    background: url(../img/player/fastforward.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/fastforward.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 #next{
-    background: url(../img/player/next.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../images/player/next.svg) no-repeat center rgba(255,255,255,0.4);
     background-size: 50%;
 }
 

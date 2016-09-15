@@ -1,0 +1,16 @@
+
+<div id="search_results">
+    {{#each search}}
+    <h1>{{title}}</h1>
+    <div class="genre">
+        {{#each books}}
+        <div class="book">
+            <a href="player/{{slug}}/{{id}}">
+                <img class="cover" src="/bookcover/default" alt="{{title}} Cover Image" srcset="{{url_thumbnail}} 1x" />
+                <div class="title">{{title}}</div>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+    {{/each}}
+</div>

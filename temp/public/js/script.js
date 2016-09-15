@@ -1,12 +1,12 @@
 window.onBeforeUnload = function (e) {
   e = e || window.event;
-
+  
   console.log("delaying page exit");
 
   setTimeout(function () {
       console.log("do something within the delay");
   }, 5000)
-
+  
   return true;
 };
 
@@ -87,6 +87,6 @@ window.onBeforeUnload = function (e) {
         for (var i = 0; i < query.length; i++) {
             images.push(query[i]);
         };
-        //processScroll(images);
+        processScroll(images);
     }, 1000);
 }(this)
