@@ -6,7 +6,7 @@ var config = {
   development: {
     root: rootPath,
     app: {
-      name: '10kapart'
+      name: 'OttoBooks'
     },
     port: 3000,
   },
@@ -14,7 +14,7 @@ var config = {
   test: {
     root: rootPath,
     app: {
-      name: '10kapart'
+      name: 'OttoBooks'
     },
     port: 3000,
   },
@@ -22,9 +22,9 @@ var config = {
   production: {
     root: rootPath,
     app: {
-      name: '10kapart'
+      name: 'OttoBooks'
     },
-    port: 3000,
+    port: process.env.port,
   }
 };
 
