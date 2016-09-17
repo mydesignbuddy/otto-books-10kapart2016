@@ -8,7 +8,7 @@
 
 <ol class="genre-cover">
     {{#each tracks}}
-    <li><a id="track_{{id}}" class="track" href="{{media.mp3}}">{{title}}</a></li>
+    <li id="track_li_{{id}}"><a id="track_{{id}}" class="track" href="{{media.mp3}}">{{title}}</a></li>
     {{/each}}
 </ol>
 
@@ -62,8 +62,10 @@ function initPlayer(){
                 document.getElementById("current_track").innerText = track.innerText;
                 for(var i=0; i<tracks.length; i++){
                     tracks[i].className = tracks[i].className.replace("active","");
+                    tracks[i].parentNode.className = tracks[i].parentNode.className.replace("active","");
                 }
                 track.className += " active";
+                track.parentNode.className += " active";
                 a.src = track.getAttribute('href')
                 a.play();
             }
