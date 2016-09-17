@@ -6,7 +6,7 @@
 
 
 
-<ol>
+<ol class="genre-cover">
     {{#each tracks}}
     <li><a id="track_{{id}}" class="track" href="{{media.mp3}}">{{title}}</a></li>
     {{/each}}
@@ -27,12 +27,14 @@
         <div id="slider">
             <div class="progress"></div>
         </div>
-        <button id="previous"> Previous Track </button>
-        <button id="rewind"> Rewind</button>
-        <button id="playpause"> Play / Pause </button>
-        <button id="stop"> Stop </button>
-        <button id="fastforward"> Fast Forward </button>
-        <button id="next"> Next Track </button>
+        <div class="button-container">
+          <button id="previous"> Previous Track </button>
+          <button id="rewind"> Rewind</button>
+          <button id="playpause"> Play / Pause </button>
+          <button id="stop"> Stop </button>
+          <button id="fastforward"> Fast Forward </button>
+          <button id="next"> Next Track </button>
+        </div>
     </div>
 </script>
 
@@ -141,7 +143,8 @@ function initPlayer(){
     }
 }
 window.onload = function(){
-    //renderPlayer();
+    renderPlayer();
+    initPlayer();
 }
 
 

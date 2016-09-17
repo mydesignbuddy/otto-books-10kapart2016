@@ -11,6 +11,7 @@ body {
     padding: 20px;
     font-family: Helvetica, Arial, sans-serif;
     padding-top: 90px;
+    padding-bottom: 200px;
 }
 
 a, a:hover, a:visited, a:focus {
@@ -21,7 +22,6 @@ h1 {
     font-size: 1em;
     text-transform: uppercase;
 }
-
 
 .navbar {
     background: rgba(0,0,0,0.1);
@@ -34,35 +34,36 @@ h1 {
     width: 100%;
     top: 0;
     left: 0;
-    padding: 1em;
+    padding: 0.5em;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.75);
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.75);
     z-index: 1000;
 }
 
-.brand-logo{
-    background: url(../img/otto-books-white-logo.svg) no-repeat 0 -29px;
+.brand-logo {
+    background: url(../img/otto-books-white-logo.svg) no-repeat 0 -18px;
     background-size: 100%;
-    width: 100px;
-    height: 55px;
+    width: 63px;
+    height: 38px;
     float: left;
     position: relative;
+    background-size: cover;
 }
-.brand-logo .otto {
-    display: none;
-}
+
 .brand-logo .books {
     position: absolute;
-    bottom: -8px;
+    bottom: -4px;
     text-transform: uppercase;
     text-align: center;
-    font-size: 12px;
+    font-size: 9px;
     display: block;
     width: 100%;
     letter-spacing: 0.5em;
     padding-left: 0.25em;
 }
-
+.brand-logo .otto {
+  display: none;
+}
 .search label {
     display: none;
 }
@@ -70,7 +71,7 @@ h1 {
 .search-dropdown {
     float: left;
     display: block;
-    height: 56px;
+    height: 41px;
     overflow: hidden;
     width: 13%;
     -webkit-border-top-left-radius: 30px;
@@ -86,16 +87,17 @@ h1 {
     padding-left: 10px;
     color: #ccc;
     margin-left: 20px;
+    display: none;
 }
 
 .search-dropdown select {
     background: transparent;
     border: none;
-    height: 60px;
+    height: 42px;
     width: 95%;
     padding: 5em 10em;
     color: #ccc;
-    font-size: 1.1em;
+    font-size: 0.7em;
 }
 .search-dropdown select:focus {
     outline:none;
@@ -114,8 +116,9 @@ h1 {
     border: 1px rgba(255,255,255,0.3) solid;
     padding: 1em;
     width: 55%;
-    font-size: 1.1em;
+    font-size: 0.8em;
     color: #fff;
+    display: none;
 }
 
 .search-text input:focus {
@@ -129,15 +132,53 @@ h1 {
     display:none;
 }
 
-.genre-cover{
-
+@media (min-width: 700px) {
+  .navbar {
+    padding: 1em;
+  }
+  .brand-logo{
+    background-position-y: -29px;
+    height: 55px;
+    width: 100px;
+  }
+  .brand-logo .books {
+    bottom: -8px;
+    font-size: 12px;
+  }
+  .search-dropdown {
+    height: 56px;
+  }
+  .search-dropdown select {
+    height: 60px;
+    font-size: 1.1em;
+  }
+  .search-text input {
+    font-size: 1.1em;
+  }
 }
-.genre-cover ul {
 
+.genre-cover{
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 .genre-cover li {
-
+    display: block;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
 }
+.genre-cover li:last-child {
+    border-bottom: none;
+}
+.genre-cover li a {
+    padding: 1em;
+    text-decoration: none;
+    display: block;
+}
+
 
 .genre {
     width: 100%;
@@ -179,12 +220,16 @@ h1 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .cover-lg {
+  width: 100%;
+}
+@media (min-width: 410px) {
+  .cover-lg {
     float: right;
-    width: 30%;
-    margin-right: 1em;
+    width: 40%;
+    margin-left: 1em;
     margin-bottom: 1em;
+  }
 }
 
 .player {
@@ -196,6 +241,7 @@ h1 {
     background-attachment: fixed;
     position: fixed;
     width: 100%;
+    height: 87px;
     bottom: 0;
     left: 0;
     padding: 1em;
@@ -209,15 +255,40 @@ h1 {
 }
 
 .player .cover-art img {
-    width: 135px;
-    height: 135px;
-    float: left;
-    margin-right: 15px;
+  display: none;
 }
 
 .player #current_track {
-    width: 100%;
+    width: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+@media (min-width: 410px) {
+
+  .player .cover-art img {
+      display: block;
+      width: 100px;
+      bottom: 10px;
+      position: absolute;
+      left: 10px;
+  }
+  .player #current_track {
+      width: 40%;
+      left: 120px;
+  }
+}
+
+@media (min-width: 600px) {
+  .player #current_track {
+      width: 60%;
+  }
+}
+
+
 .player #current_time {
     display: inline;
 }
@@ -228,21 +299,29 @@ h1 {
     display: inline;
 }
 .player .time-display{
-    float: left;
+    position: absolute;
+    top: 10px;
+    right: 57px;
+}
+
+.player .button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
 }
 
 .player button {
-    display: inline-block;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    background-color: rgba(255,255,255,0.2);
-    border: 1px rgba(255,255,255,0.7) solid;
-    padding: 1em;
-    font-size: 0em;
-    height: 50px;
-    width: 50px;
-    color: transparent;
+  display: inline-block;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  background-color: rgba(255,255,255,0.2);
+  border: 1px rgba(255,255,255,0.7) solid;
+  padding: 1em;
+  font-size: 0em;
+  height: 50px;
+  width: 50px;
+  color: transparent;
 }
 
 .player button:focus {
@@ -257,47 +336,56 @@ h1 {
     left: 0;
 }
 .player #slider .progress{
-    -webkit-border-radius: 10em;
-    -moz-border-radius: 10em;
-    border-radius: 10em;
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgb(255, 202, 0);
     width: 0%;
-    height: 0.5em;
+    height: 0.25em;
 }
 
 #previous{
-    background: url(../img/player/previous.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/previous.svg) no-repeat center;
     background-size: 50%;
+    width: 35px;
+    height: 35px;
 }
 #rewind{
-    background: url(../img/player/rewind.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/rewind.svg) no-repeat center;
     background-size: 50%;
+    width: 40px;
+    height: 40px;
 }
 #playpause{
-    background: url(../img/player/pause.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/pause.svg) no-repeat center rgba(255, 202, 0, 0.55);
     background-size: 50%;
+    width: 65px;
+    height: 65px;
+    border-color: rgb(255, 202, 0);
 }
 
 #playpause.play{
-    background: url(../img/player/play.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/play.svg) no-repeat center;
     background-size: 50%;
+    border: 1px rgba(255,255,255,0.7) solid;
 }
 
 #stop{
-    background: url(../img/player/stop.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/stop.svg) no-repeat center ;
     background-size: 50%;
 }
 #fastforward{
-    background: url(../img/player/fastforward.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/fastforward.svg) no-repeat center ;
     background-size: 50%;
+    width: 40px;
+    height: 40px;
 }
 #next{
-    background: url(../img/player/next.svg) no-repeat center rgba(255,255,255,0.4);
+    background: url(../img/player/next.svg) no-repeat center ;
     background-size: 50%;
+    width: 35px;
+    height: 35px;
 }
 
 .track.active {
-    background-color: #0e2b3f;
+    background-color: rgba(255, 202, 0, 0.4);;
     color: #fff;
 }
 
