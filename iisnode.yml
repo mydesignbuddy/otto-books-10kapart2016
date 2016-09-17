@@ -24,4 +24,7 @@
 # logFileFlushInterval: 5000
 # flushResponse: false
 # enableXFF: false
-# promoteServerVars:  
+# promoteServerVars:
+loggingEnabled: true
+debuggingEnabled: true
+devErrorsEnabled: true
