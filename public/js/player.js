@@ -104,6 +104,6 @@ function initPlayer(){
     }
 }
 window.onload = function(){
-    //renderPlayer();
-    //initPlayer();
+    renderPlayer();
+    initPlayer();
 }
