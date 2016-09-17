@@ -8,6 +8,9 @@ module.exports = function (grunt) {
   // load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+
   var reloadPort = 35729, files;
 
   grunt.initConfig({
@@ -15,6 +18,27 @@ module.exports = function (grunt) {
     develop: {
       server: {
         file: 'app.js'
+      }
+    },
+    cssmin: {
+      dist: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'public/css/main.min.css': ['public/css/**/*.css'],
+        }
+      }
+    },
+    uglify: {
+      dist: {
+        options: {
+          sourceMap: true
+        },
+        files: {
+          'public/js/main.min.js': ['public/js/main.js'],
+          'public/js/player.min.js': ['public/js/player.js'],
+        }
       }
     },
     watch: {
@@ -55,19 +79,21 @@ module.exports = function (grunt) {
   grunt.registerTask('delayed-livereload', 'Live reload after the node server has restarted.', function () {
     var done = this.async();
     setTimeout(function () {
-      request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','),  function(err, res) {
-          var reloaded = !err && res.statusCode === 200;
-          if (reloaded)
-            grunt.log.ok('Delayed live reload successful.');
-          else
-            grunt.log.error('Unable to make a delayed live reload.');
-          done(reloaded);
-        });
+      request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','), function (err, res) {
+        var reloaded = !err && res.statusCode === 200;
+        if (reloaded)
+          grunt.log.ok('Delayed live reload successful.');
+        else
+          grunt.log.error('Unable to make a delayed live reload.');
+        done(reloaded);
+      });
     }, 500);
   });
 
   grunt.registerTask('default', [
     'develop',
+    'cssmin',
+    'uglify',
     'watch'
   ]);
 };

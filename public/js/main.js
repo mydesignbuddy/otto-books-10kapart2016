@@ -87,6 +87,6 @@ window.onBeforeUnload = function (e) {
         for (var i = 0; i < query.length; i++) {
             images.push(query[i]);
         };
-        processScroll(images);
+        //processScroll(images);
     }, 1000);
 }(this)
