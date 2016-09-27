@@ -1,6 +1,6 @@
 function renderPlayer() {
   document.getElementById('player').innerHTML = document.getElementById('player-template').innerText;
-  document.getElementById('player-track-list').innerHTML = '<ol id="player-track-list" class="list-menu">' + document.getElementById('track-list').innerHTML + "</ol>";
+  document.getElementById('player-track-list-container').innerHTML = '<ol id="player-track-list" class="list-menu">' + document.getElementById('track-list').innerHTML + "</ol>";
   document.getElementById('track-list').style.display = "none";
 }
 function initPlayer() {
@@ -68,10 +68,10 @@ function initPlayer() {
         }
         document.getElementById('toggle-button').onclick = function () {
           if (document.querySelector('.player.player-open') != null) {
-            document.querySelector('.player').className = "player";
+            document.querySelector('.player').className = "player animated";
             document.getElementById('toggle-button').innerHTML = "&#9650; Tracks &#9650;";
           } else {
-            document.querySelector('.player').className = "player player-open";
+            document.querySelector('.player').className = "player animated player-open";
             document.getElementById('toggle-button').innerHTML = "&#9660; Tracks &#9660;";
           }
         };
