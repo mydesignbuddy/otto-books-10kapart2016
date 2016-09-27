@@ -14,19 +14,26 @@
             <button type="submit">Search</button>
         </form>
 </div>
+<div id="content" class="animated fadeInUpBig delay-1-sec">
 
-<div id="genre_results" class="animated fadeInUpBig delay-1-sec">
-    <h2>Fiction</h2>
-    <ul class="genre-cover">
-    {{#each fiction}}
-        <li><a href="genre/{{titleEscaped}}" alt="{{title}}" title="{{title}}">{{title}}</a></li>
+  <h2>Top Books</h2>
+  <div class="top-results">
+    {{#each topBooks}}
+      {{> bookThumb }}
     {{/each}}
-    </ul>
-
-    <h2>Non-Fiction</h2>
-    <ul class="genre-cover">
-    {{#each nonFiction}}
-        <li><a href="genre/{{titleEscaped}}" alt="{{title}}" title="{{title}}">{{title}}</a></li>
-    {{/each}}
-    </ul>
+  </div>
+  <div class="genre-results">
+      <h2>Fiction</h2>
+      <ul class="list-menu">
+      {{#each fiction}}
+          <li><a href="genre/{{titleEscaped}}" alt="{{title}}" title="{{title}}">{{title}}</a></li>
+      {{/each}}
+      </ul>
+      <h2>Non-Fiction</h2>
+      <ul class="list-menu">
+      {{#each nonFiction}}
+          <li><a href="genre/{{titleEscaped}}" alt="{{title}}" title="{{title}}">{{title}}</a></li>
+      {{/each}}
+      </ul>
+  </div>
 </div>

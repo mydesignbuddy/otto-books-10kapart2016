@@ -8,12 +8,14 @@ module.exports = function (app) {
 };
 
 router.get('/', function (req, res, next) {
+
   var model = new HomeModel('Public Domain Audio Books ');
-  res.render('index', model);
+  model.load(function (m) {
+    res.render('index', m);
+  });
 });
 
 router.get('/bookcover/:name', function (req, res, next) {
   res.setHeader('Content-Type', 'image/svg+xml');
   res.sendFile(path.join(__dirname, '../../public/img/loading.svg'));
 });
-

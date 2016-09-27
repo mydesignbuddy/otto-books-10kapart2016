@@ -1,25 +1,39 @@
-<h1>{{title}}</h1>
+<script>
+window.bookTitle = "{{title}}";
+</script>
+<div class="book-details">
+  <h1>{{title}}</h1>
 
-<img class="cover-lg lazy" alt="{{title}} Cover Image" data-src="{{url_thumdnail}}" />
+  <img class="cover-lg lazy" alt="{{title}} Cover Image" data-src="{{url_thumbnail}}" />
 
-<p>{{{description}}}</p>
-
-
-
-<ol class="genre-cover">
-    {{#each tracks}}
-    <li id="track_li_{{id}}"><a id="track_{{id}}" class="track" href="{{media.mp3}}">{{title}}</a></li>
+  <h2>Author(s)</h2>
+  <ul>
+    {{#each authors}}
+    <li>{{first_name}} {{last_name}}</li>
     {{/each}}
-</ol>
+  </ul>
+
+  <p>{{{description}}}</p>
+
+  <ol id="track-list" class="list-menu">
+      {{#each tracks}}
+      <li id="track_li_{{id}}"><a id="track_{{id}}" class="track" href="{{media.mp3}}">{{title}}</a></li>
+      {{/each}}
+  </ol>
+</div>
 
 <div id="player"></div>
 
 <script id="player-template" type="text/x-javascript-template">
     <div class="player">
-        <div class="cover-art">
-            <img class="lazy" alt="{{title}} Cover Image" data-src="{{url_thumdnail}}" />
+        <div id="player-expand-toggle">
+          <div id="toggle-button">&#9650; Tracks &#9650;</div>
         </div>
-        <div id="current_track">{{title}}</div>
+
+        <div class="cover-art">
+            <img class="lazy" alt="{{title}} Cover Image" data-src="{{url_thumbnail}}" />
+        </div>
+        <div id="current_track"></div>
         <div class="time-display">
             <div id="current_time">00:00:00</div>
             <div id="duration">00:00:00</div>
@@ -35,7 +49,9 @@
           <button id="fastforward"> Fast Forward </button>
           <button id="next"> Next Track </button>
         </div>
+        <div id="player-track-list"></div>
     </div>
 </script>
 
-<script src="/js/player.min.js"></script>
+{{!--<script src="/js/player.min.js"></script>--}}
+<script src="/js/player.js"></script>

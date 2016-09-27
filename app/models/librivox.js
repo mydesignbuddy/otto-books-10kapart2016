@@ -33,7 +33,7 @@ function Librivox() {
 
                   thumbnailurls.push({
                     url_librivox: url_librivox,
-                    url_thumdnail: $('img[alt="book-cover-large"]').attr('src')
+                    url_thumbnail: $('img[alt="book-cover-large"]').attr('src')
                   });
                   resolve();
                 }).catch(function (err) {
@@ -46,13 +46,13 @@ function Librivox() {
               } catch (e) {
                 thumbnailurls.push({
                   url_librivox: url_librivox,
-                  url_thumdnail: null
+                  url_thumbnail: null
                 });
               }
             } else {
               thumbnailurls.push({
                 url_librivox: url_librivox,
-                url_thumdnail: null
+                url_thumbnail: null
               });
             }
           });
@@ -68,7 +68,7 @@ function Librivox() {
                 return (urls.url_librivox === obj.url_librivox);
               });
               if (thumb != undefined) {
-                obj.url_thumbnail = thumb.url_thumdnail;
+                obj.url_thumbnail = thumb.url_thumbnail;
                 obj.slug = slugify(obj.title);
               }
             }
@@ -115,7 +115,7 @@ function Librivox() {
 
                   thumbnailurls.push({
                     url_librivox: url_librivox,
-                    url_thumdnail: $('img[alt="book-cover-large"]').attr('src')
+                    url_thumbnail: $('img[alt="book-cover-large"]').attr('src')
                   });
                   resolve();
                 }).catch(function (err) {
@@ -128,13 +128,13 @@ function Librivox() {
               } catch (e) {
                 thumbnailurls.push({
                   url_librivox: url_librivox,
-                  url_thumdnail: null
+                  url_thumbnail: null
                 });
               }
             } else {
               thumbnailurls.push({
                 url_librivox: url_librivox,
-                url_thumdnail: null
+                url_thumbnail: null
               });
             }
           });
@@ -150,7 +150,7 @@ function Librivox() {
                 return (urls.url_librivox === obj.url_librivox);
               });
               if (thumb != undefined) {
-                obj.url_thumbnail = thumb.url_thumdnail;
+                obj.url_thumbnail = thumb.url_thumbnail;
                 obj.slug = slugify(obj.title);
               }
             }
@@ -175,67 +175,106 @@ function Librivox() {
     request(apiurl).then(function (data) {
       var model = JSON.parse(data).books[0];
 
-      parser(model.url_rss, function (err, rss) {
-        if (err) {
-          console.log(err);
-          callback({ error: err });
-        }
-        model.tracks = [];
-        model.url_thumdnail = null;
 
-        for (var i = 0; i < rss.length; i++) {
-          model.tracks.push({
-            id: i + 1,
-            title: rss[i].title,
-            media: {
-              mp3: rss[i].link
+      if (model.url_rss != null || model.url_rss != '') {
+        parser(model.url_rss, function (err, rss) {
+          if (err) {
+            console.log(err);
+            callback({ error: err });
+            return;
+          }
+          model.tracks = [];
+          model.url_thumbnail = null;
+
+          if (rss != null) {
+            if (rss.length != null || rss.length != 0) {
+              for (var i = 0; i < rss.length; i++) {
+                model.tracks.push({
+                  id: i + 1,
+                  title: rss[i].title,
+                  media: {
+                    mp3: rss[i].link
+                  }
+                })
+              }
             }
-          })
-        }
+          }
 
-        tidy(model.description, {
-          showBodyOnly: true,
-          hideComments: false,
-          indent: true,
-          outputXhtml: true
-        }, function (err, html) {
-          model.description = html;
-          if (model.url_librivox !== undefined) {
-            try {
-              request(model.url_librivox).then(function (html) {
-                $ = cheerio.load(html);
+          tidy(model.description, {
+            showBodyOnly: true,
+            hideComments: false,
+            indent: true,
+            outputXhtml: true
+          }, function (err, html) {
+            model.description = html;
+            if (model.url_librivox !== undefined) {
+              try {
+                request(model.url_librivox).then(function (html) {
+                  $ = cheerio.load(html);
 
-                model.url_thumdnail = $('img[alt="book-cover-large"]').attr('src');
+                  model.url_thumbnail = $('img[alt="book-cover-large"]').attr('src');
 
-                callback(model);
-              }).catch(function (err) {
-                // do nothing for now
+                  callback(model);
+                }).catch(function (err) {
+                  // do nothing for now
+                  console.log("error getting thumbnail");
+                  console.log(err);
+
+                  callback(model);
+                });
+              } catch (e) {
                 console.log("error getting thumbnail");
-                console.log(err);
-
+                console.log(e);
                 callback(model);
-              });
-            } catch (e) {
-              console.log("error getting thumbnail");
-              console.log(e);
+              }
+            } else {
               callback(model);
             }
-          } else {
-            callback(model);
-          }
+          });
         });
-      });
-
+      } else {
+        callback({ error: "no audio" });
+      }
 
     })
       .catch(function (err) {
         callback({ error: err });
       });
   };
+
+  this.getByBookIds = function (booksIds, callback) {
+    var books = [];
+    var self = this;
+    var promises = booksIds.map(function (booksId) {
+      console.log(booksId);
+      return new Promise(function (resolve, reject) {
+        self.getByBookId(booksId, function (book) {
+          if (books.error == undefined) {
+            books.push(book);
+          }
+          resolve();
+        });
+      });
+    });
+    Promise.all(promises)
+      .then(function (results) {
+        model = _.map(books, function (obj) {
+          obj.slug = slugify(obj.title);
+          return obj;
+        });
+        console.log(JSON.stringify(model[0]))
+        callback(model);
+      })
+      .catch(function (err) {
+        console.log("error getting during promiseall");
+        console.log(err);
+        callback({ error: err });
+      });
+  };
+
   this.genres = {
     fiction: [
       "Children's Fiction",
-      "Children's Non-fiction",
       "Action & Adventure Fiction",
       "Crime & Mystery Fiction",
       "Culture & Heritage",
@@ -265,6 +304,7 @@ function Librivox() {
       "Westerns"
     ],
     nonFiction: [
+      "Children's Non-fiction",
       "War & Military",
       "Animals",
       "Art, Design & Architecture",

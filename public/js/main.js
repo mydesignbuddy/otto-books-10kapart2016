@@ -88,5 +88,5 @@ window.onBeforeUnload = function (e) {
             images.push(query[i]);
         };
         processScroll(images);
-    }, 1000);
+    }, 500);
 }(this)

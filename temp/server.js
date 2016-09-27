@@ -182,7 +182,7 @@ function setupServer(worker) {
 
                                         thumbnailurls.push({
                                             url_librivox: url_librivox,
-                                            url_thumdnail: $('img[alt="book-cover-large"]').attr('src')
+                                            url_thumbnail: $('img[alt="book-cover-large"]').attr('src')
                                         });
                                         resolve();
                                     }).catch(function (err) {
@@ -195,13 +195,13 @@ function setupServer(worker) {
                                 } catch (e) {
                                     thumbnailurls.push({
                                         url_librivox: url_librivox,
-                                        url_thumdnail: null
+                                        url_thumbnail: null
                                     });
                                 }
                             } else {
                                 thumbnailurls.push({
                                     url_librivox: url_librivox,
-                                    url_thumdnail: null
+                                    url_thumbnail: null
                                 });
                             }
                         });
@@ -217,7 +217,7 @@ function setupServer(worker) {
                                     return (urls.url_librivox === obj.url_librivox);
                                 });
                                 if (thumb != undefined) {
-                                    obj.url_thumbnail = thumb.url_thumdnail;
+                                    obj.url_thumbnail = thumb.url_thumbnail;
                                     obj.slug = slugify(obj.title);
                                 }
                             }
@@ -264,7 +264,7 @@ function setupServer(worker) {
 
                                         thumbnailurls.push({
                                             url_librivox: url_librivox,
-                                            url_thumdnail: $('img[alt="book-cover-large"]').attr('src')
+                                            url_thumbnail: $('img[alt="book-cover-large"]').attr('src')
                                         });
                                         resolve();
                                     }).catch(function (err) {
@@ -277,13 +277,13 @@ function setupServer(worker) {
                                 } catch (e) {
                                     thumbnailurls.push({
                                         url_librivox: url_librivox,
-                                        url_thumdnail: null
+                                        url_thumbnail: null
                                     });
                                 }
                             } else {
                                 thumbnailurls.push({
                                     url_librivox: url_librivox,
-                                    url_thumdnail: null
+                                    url_thumbnail: null
                                 });
                             }
                         });
@@ -299,7 +299,7 @@ function setupServer(worker) {
                                     return (urls.url_librivox === obj.url_librivox);
                                 });
                                 if (thumb != undefined) {
-                                    obj.url_thumbnail = thumb.url_thumdnail;
+                                    obj.url_thumbnail = thumb.url_thumbnail;
                                     obj.slug = slugify(obj.title);
                                 }
                             }
@@ -330,7 +330,7 @@ function setupServer(worker) {
                         callback({ error: err });
                     }
                     model.tracks = [];
-                    model.url_thumdnail = null;
+                    model.url_thumbnail = null;
 
                     for (var i = 0; i < rss.length; i++) {
                         model.tracks.push({
@@ -354,7 +354,7 @@ function setupServer(worker) {
                                     request(model.url_librivox).then(function (html) {
                                         $ = cheerio.load(html);
 
-                                        model.url_thumdnail = $('img[alt="book-cover-large"]').attr('src');
+                                        model.url_thumbnail = $('img[alt="book-cover-large"]').attr('src');
                                         
                                         callback(model);
                                     }).catch(function (err) {
