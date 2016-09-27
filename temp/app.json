@@ -1,7 +1,0 @@
-{
-  "name": "Otto Books",
-  "description": "Public Domain audio book reader. 10k apart entry by Buddy Toups",
-  "repository": "https://github.com/mydesignbuddy/ottobooks",
-  "logo": "",
-  "keywords": ["node", "express"]
-}
