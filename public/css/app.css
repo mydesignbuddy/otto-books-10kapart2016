@@ -192,8 +192,16 @@ h2 {
     margin-bottom: 1em;
 }
 
+.play-overlay {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 20%;
+}
 
 .book {
+    position: relative;
     float: left;
     margin: 0.2em 0.5em;
     overflow: hidden;

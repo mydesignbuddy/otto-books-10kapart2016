@@ -2,11 +2,7 @@
     <div class="genre">
         <h2>{{title}}</h2>
         {{#each books}}
-        <div class="book">
-            <a href="/player/{{slug}}/{{id}}" alt="{{title}}" title="{{title}}">
-                <img class="cover lazy" src="/bookcover/default" alt="{{title}}" data-src="{{url_thumbnail}}" />
-            </a>
-        </div>
+          {{> bookThumb }}
         {{/each}}
     </div>
 </div>

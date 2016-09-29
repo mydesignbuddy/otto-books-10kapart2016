@@ -17,5 +17,5 @@ router.get('/', function (req, res, next) {
 
 router.get('/bookcover/:name', function (req, res, next) {
   res.setHeader('Content-Type', 'image/svg+xml');
-  res.sendFile(path.join(__dirname, '../../public/img/loading.svg'));
+  res.sendFile(path.join(__dirname, '../../public/img/blank.svg'));
 });
