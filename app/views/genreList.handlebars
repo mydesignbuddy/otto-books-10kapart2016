@@ -1,0 +1,15 @@
+
+  <div class="genre-results">
+      <h2>Fiction</h2>
+      <ul class="list-menu">
+      {{#each fiction}}
+          <li><a href="genre/{{titleEscaped}}" alt="{{title}}" title="{{title}}">{{title}}</a></li>
+      {{/each}}
+      </ul>
+      <h2>Non-Fiction</h2>
+      <ul class="list-menu">
+      {{#each nonFiction}}
+          <li><a href="genre/{{titleEscaped}}" alt="{{title}}" title="{{title}}">{{title}}</a></li>
+      {{/each}}
+      </ul>
+  </div>
