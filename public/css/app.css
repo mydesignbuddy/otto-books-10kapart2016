@@ -14,6 +14,10 @@ body {
     padding-bottom: 200px;
 }
 
+.dontRead {
+    speak: none;
+}
+
 a, a:hover, a:visited, a:focus {
     color: #fff;
 }
