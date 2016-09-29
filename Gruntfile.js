@@ -26,7 +26,8 @@ module.exports = function (grunt) {
           sourceMap: true
         },
         files: {
-          'public/css/main.min.css': ['public/css/**/*.css'],
+          'public/css/app.min.css': ['public/css/app.css'],
+          'public/css/player.min.css': ['public/css/player.css'],
         }
       }
     },

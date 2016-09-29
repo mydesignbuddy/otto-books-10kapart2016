@@ -141,7 +141,7 @@ h2 {
     padding: 1em;
   }
   .brand-logo{
-    background-position-y: -29px;
+    background-position: 0 -31px;
     height: 55px;
     width: 100px;
   }
@@ -289,7 +289,7 @@ h2 {
 #player-expand-toggle #toggle-button{
     display: inline-block;
     cursor: pointer;
-    width: 200px;
+    width: 120px;
     height: 20px;
     font-size: 0.8em;
     color: #000;
@@ -377,80 +377,6 @@ h2 {
   position: absolute;
   top: 30px;
   right: 50px;
-}
-
-.player button {
-  display: inline-block;
-  -webkit-border-radius: 100px;
-  -moz-border-radius: 100px;
-  border-radius: 100px;
-  background-color: rgba(255,255,255,0.2);
-  border: 1px rgba(255,255,255,0.7) solid;
-  padding: 1em;
-  font-size: 0em;
-  height: 50px;
-  width: 50px;
-  color: transparent;
-}
-
-.player button:focus {
-    outline:none;
-}
-.player #slider{
-    background-color: rgba(255,255,255,0.1);
-    width: 100%;
-    height: 4px;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.player #slider .progress{
-    background-color: rgb(255, 202, 0);
-    width: 0%;
-    height: 0.25em;
-}
-
-#previous{
-    background: url(../img/player/previous.svg) no-repeat center;
-    background-size: 50%;
-    width: 35px;
-    height: 35px;
-}
-#rewind{
-    background: url(../img/player/rewind.svg) no-repeat center;
-    background-size: 50%;
-    width: 40px;
-    height: 40px;
-}
-#playpause{
-    background: url(../img/player/pause.svg) no-repeat center rgba(255, 202, 0, 0.55);
-    background-size: 50%;
-    width: 65px;
-    height: 65px;
-    border-color: rgb(255, 202, 0);
-}
-
-#playpause.play{
-    background: url(../img/player/play.svg) no-repeat center;
-    background-size: 50%;
-    border: 1px rgba(255,255,255,0.7) solid;
-}
-
-#stop{
-    background: url(../img/player/stop.svg) no-repeat center ;
-    background-size: 50%;
-}
-#fastforward{
-    background: url(../img/player/fastforward.svg) no-repeat center ;
-    background-size: 50%;
-    width: 40px;
-    height: 40px;
-}
-#next{
-    background: url(../img/player/next.svg) no-repeat center ;
-    background-size: 50%;
-    width: 35px;
-    height: 35px;
 }
 
 .list-menu li.active {

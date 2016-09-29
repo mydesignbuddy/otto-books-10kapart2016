@@ -22,10 +22,8 @@ window.bookTitle = "{{title}}";
   </ol>
 </div>
 
-<div id="player"></div>
-
-<script id="player-template" type="text/x-javascript-template">
-    <div class="player animated">
+<div id="player">
+  <div class="player animated">
         <div id="player-expand-toggle">
           <div id="toggle-button">&#9650; Tracks &#9650;</div>
         </div>
@@ -35,8 +33,8 @@ window.bookTitle = "{{title}}";
         </div>
         <div id="current_track"></div>
         <div class="time-display">
-            <div id="current_time">00:00:00</div>
-            <div id="duration">00:00:00</div>
+            <div id="current_time">00:00</div>
+            <div id="duration">00:00</div>
         </div>
         <div id="slider">
             <div class="progress"></div>
@@ -51,7 +49,7 @@ window.bookTitle = "{{title}}";
         </div>
         <div id="player-track-list-container"></div>
     </div>
-</script>
+</div>
 
 <script src="/js/player.min.js"></script>
 {{!--<script src="/js/player.js"></script>--}}

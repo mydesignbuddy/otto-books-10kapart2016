@@ -1,7 +1,17 @@
+function gid (elem) { return document.getElementById(elem); }
+function qs(elem) { return document.querySelector(elem); }
+function qsa(elem) { return document.querySelectorAll(elem); }
+
 function renderPlayer() {
-  document.getElementById('player').innerHTML = document.getElementById('player-template').innerText;
-  document.getElementById('player-track-list-container').innerHTML = '<ol id="player-track-list" class="list-menu">' + document.getElementById('track-list').innerHTML + "</ol>";
-  document.getElementById('track-list').style.display = "none";
+  var trackContent = gid('track-list').innerHTML;
+  gid('player-track-list-container').innerHTML = '<ol id="player-track-list" class="list-menu">' + trackContent + "</ol>";
+  gid('track-list').style.display = "none";
+  //lazy load CSS
+  var fileref = document.createElement("link");
+  fileref.setAttribute("rel", "stylesheet");
+  fileref.setAttribute("type", "text/css");
+  fileref.setAttribute("href", "/css/player.min.css");
+  document.getElementsByTagName("head")[0].appendChild(fileref);
 }
 function initPlayer() {
   // Check for audio element support.
@@ -9,22 +19,14 @@ function initPlayer() {
     try {
       renderPlayer();
       var a = document.createElement("AUDIO");
-      var tracks = document.querySelectorAll('#player-track-list .track');
+      var tracks = qsa('#player-track-list .track');
       var detectSupport = {
         hasMP3Support: (a.canPlayType('audio/mpeg') == "probably" || a.canPlayType('audio/mpeg') == "maybe"),
         hasOGGSupport: (a.canPlayType('audio/ogg') == "probably" || a.canPlayType('audio/ogg') == "maybe")
       };
-      if (detectSupport.hasMP3Support) {
-        switchTracks(tracks[0], function () {
-          //plays the next rack when this one ends
-          a.addEventListener("ended", function () {
-            goToNextTrack();
-          });
-        });
-      }
 
       function switchTracks(track, callback) {
-        document.getElementById("current_track").innerText = track.innerText + " - " + window.bookTitle;
+        gid("current_track").innerHTML = track.innerText + " - " + window.bookTitle;
         for (var i = 0; i < tracks.length; i++) {
           tracks[i].className = tracks[i].className.replace("active", "");
           tracks[i].parentNode.className = tracks[i].parentNode.className.replace("active", "");
@@ -38,21 +40,32 @@ function initPlayer() {
         }
       }
 
+      if (detectSupport.hasMP3Support) {
+        switchTracks(tracks[0], function () {
+          //plays the next rack when this one ends
+          a.addEventListener("ended", function () {
+            goToNextTrack();
+          });
+        });
+      }
+
+
+
       function goToPreviousTrack() {
-        var currentIndex = document.querySelector('#player-track-list .track.active').getAttribute('id').replace("track_", "") - 1;
+        var currentIndex = qs('#player-track-list .track.active').getAttribute('id').replace("track_", "") - 1;
 
         if (!currentIndex <= 0) {
-          switchTracks(document.querySelectorAll('#player-track-list .track')[currentIndex - 1]);
+          switchTracks(qsa('#player-track-list .track')[currentIndex - 1]);
         } else {
           // if on the end just reset the time
           a.currentTime = 0;
         }
       };
       function goToNextTrack() {
-        var currentIndex = document.querySelector('#player-track-list .track.active').getAttribute('id').replace("track_", "") - 1;
+        var currentIndex = qs('#player-track-list .track.active').getAttribute('id').replace("track_", "") - 1;
 
         if (currentIndex + 1 <= (tracks.length - 1)) {
-          switchTracks(document.querySelectorAll('#player-track-list .track')[currentIndex + 1]);
+          switchTracks(qsa('#player-track-list .track')[currentIndex + 1]);
         } else {
           // if on the end just reset the time
           a.currentTime = 0;
@@ -66,40 +79,40 @@ function initPlayer() {
             e.preventDefault ? e.preventDefault() : e.returnValue = false;
           }
         }
-        document.getElementById('toggle-button').onclick = function () {
-          if (document.querySelector('.player.player-open') != null) {
-            document.querySelector('.player').className = "player animated";
-            document.getElementById('toggle-button').innerHTML = "&#9650; Tracks &#9650;";
+        gid('toggle-button').onclick = function () {
+          if (qs('.player.player-open') != null) {
+            qs('.player').className = "player animated";
+            gid('toggle-button').innerHTML = "&#9650; Tracks &#9650;";
           } else {
-            document.querySelector('.player').className = "player animated player-open";
-            document.getElementById('toggle-button').innerHTML = "&#9660; Tracks &#9660;";
+            qs('.player').className = "player animated player-open";
+            gid('toggle-button').innerHTML = "&#9660; Tracks &#9660;";
           }
         };
 
-        document.getElementById("playpause").onclick = function () {
+        gid("playpause").onclick = function () {
           if (a.paused) {
             a.play();
           } else {
             a.pause();
           }
         };
-        document.getElementById('stop').onclick = function () {
+        gid('stop').onclick = function () {
           a.pause();
           a.currentTime = 0;
         };
 
-        document.getElementById('rewind').onclick = function () {
+        gid('rewind').onclick = function () {
           a.currentTime -= 15.0;
         };
 
-        document.getElementById('fastforward').onclick = function () {
+        gid('fastforward').onclick = function () {
           a.currentTime += 15.0;
         };
 
-        document.getElementById('previous').onclick = goToPreviousTrack;
+        gid('previous').onclick = goToPreviousTrack;
 
 
-        document.getElementById('next').onclick = goToNextTrack;
+        gid('next').onclick = goToNextTrack;
 
       }
 
@@ -121,16 +134,16 @@ function initPlayer() {
           durationTimeFormatted += (durationTimeArr[0].length < 2) ? "0" + durationTimeArr[0] : durationTimeArr[0];
           durationTimeFormatted += ":";
           durationTimeFormatted += (durationTimeArr[1].length < 2) ? durationTimeArr[1] + "0" : durationTimeArr[1]
-
-          document.getElementById('current_time').innerText = currentTimeFormatted;
-          document.getElementById('duration').innerText = durationTimeFormatted;
-          document.querySelector('#slider .progress').style.width = progression + "%";
+          //console.log(currentTimeFormatted + " -- " + durationTimeFormatted)
+          gid('current_time').innerHTML = currentTimeFormatted;
+          gid('duration').innerHTML = durationTimeFormatted;
+          qs('#slider .progress').style.width = progression + "%";
         } catch(e) {}
 
         if (a.paused) {
-          document.getElementById("playpause").className = "play";
+          gid("playpause").className = "play";
         } else {
-          document.getElementById("playpause").className = "";
+          gid("playpause").className = "";
         }
       }
 
